@@ -8,7 +8,8 @@ namespace NrComplex
 {
     class complex
     {
-        private double a, b;
+        protected double a, b;
+        protected complexTrigForm t = new complexTrigForm();
 
         public complex() : base()
         {
@@ -34,6 +35,11 @@ namespace NrComplex
         public double Imaginary
         {
             get { return b; }
+        }
+
+        public complexTrigForm TrigForm
+        {
+            get { return t; }
         }
 
         public static complex operator + (complex x, complex y)
@@ -82,9 +88,31 @@ namespace NrComplex
                 else if (b > 0 && a == 0) nr = b.ToString() + "i";
                 else if (b < 0) nr = nr + b.ToString() + "i";
                 else nr = nr + "";
+                if(t.R != 0)
+                {
+                    nr = nr + "\n" + t.R.ToString() + "(cos(" + t.Teta.ToString() + ") + i*sin(" + t.Teta.ToString() + "))";
+                }
             }
             else nr = "0";
+
             return nr;
+        }
+
+        public virtual complex power(complex x, int pow)
+        {
+            complex p = new complex();
+            p = x;
+            for (int i = 1; i < pow; i++)
+            {
+                p *= x;
+            }
+            return p;
+        }
+
+        public void setTrigForm(complexTrigForm t)
+        {
+            this.t.R = t.R;
+            this.t.Teta = t.Teta;
         }
 
         public string trigForm() // forma trigonometrica
@@ -101,7 +129,7 @@ namespace NrComplex
             string nr;
             double r = Math.Sqrt(a * a + b * b);
             double teta = Math.Atan2(b, a);
-            nr =n.ToString() + "*" + r.ToString() + "("+ n.ToString() + "*" + "cos(" + teta.ToString() + ")"+ n.ToString() + "*" + "+ i*sin(" + teta.ToString() + "))";
+            nr =n.ToString() + "*" + r.ToString() + "("+ n.ToString() + "*" + "cos(" + teta.ToString() + ")"+ n.ToString() + "*" + " i*sin(" + teta.ToString() + "))";
             return nr;
         }
 

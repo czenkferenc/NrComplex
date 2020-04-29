@@ -10,18 +10,25 @@ namespace NrComplex
     {
         static void Main(string[] args)
         {
-            complex c1 = new complex();
+            complex c1 = new complex(-1,-1);
             complex c2 = new complex(2,3);
             complex c3 = new complex(4,5);
             complex c4 = new complex(0,-2);
             complex c5 = new complex(2);
+            complexD cd = new complexD();
 
-            //testa afisare
+            //test afisare
             Console.WriteLine(c1.ToString());
             Console.WriteLine(c2.ToString());
             Console.WriteLine(c3.ToString());
             Console.WriteLine(c4.ToString());
             Console.WriteLine(c5.ToString());
+            Console.WriteLine();
+
+            complex[] c = new complex[4] { c2, c3, c4, c5 };
+            double dist = cd.distance(c1, c);
+
+            Console.WriteLine(dist.ToString());
             Console.WriteLine();
 
             //test calcule 
@@ -42,6 +49,9 @@ namespace NrComplex
             Console.WriteLine(c3.trigForm(3, true)); // forma trigonometrica x^n calculata cu sau fara schimbarea valorii
             Console.WriteLine(c3.ToString());
             Console.WriteLine();
+ 
+            c3= cd.power(c3, 3);
+            Console.WriteLine(c3.ToString()); 
            
         }
     }
